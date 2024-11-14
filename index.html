@@ -3,17 +3,28 @@
 
 <head>
     <meta charset="utf-8">
-    <title>U3A Epsom NZ</title>
+    <title>U3A Epsom v2</title>
     <meta name="description" content="U3A Epsom home page">
     <meta name="keywords" content="u3a epsom, u3aepsom, u3aepsomnz, membership, newsletter">
 
     <style>
-        
         .div-wholepage {
             width: 1000px;
             margin-left: auto;
             margin-right: auto;
             padding-left: 248px;
+            /* background-color: aliceblue; */
+        }
+
+        .wide-button {
+            background-color: rgb(226, 205, 18);
+            color: aliceblue;
+            font-family: Arial;
+            font-size: large;
+            font-weight: bold;
+            width: 753px;
+            height: 40px;
+            margin-bottom: 20px;
         }
 
         button {
@@ -56,7 +67,27 @@
             vertical-align: top;
             font-family: Arial;
         }
-   
+
+        #lastlast-pdf-links {
+            font-family: Arial;
+            font-weight: bold;
+            font-size: large;
+            color: rgb(14, 4, 43);
+        }
+
+        #last-pdf-links {
+            font-family: Arial;
+            font-weight: bold;
+            font-size: large;
+            color: rgb(14, 4, 43);
+        }
+
+        #current-pdf-links {
+            font-family: Arial;
+            font-weight: bold;
+            font-size: large;
+            color: rgb(14, 4, 43);
+        }
     </style>
 
 </head>
@@ -69,12 +100,26 @@
         <div class="banner">
             <img src="U3A epsom.png" width="500px" height="100px">
         </div>
+
+
+
+        <!--  These codes will not be used until version 3
+        <div class="wide-button">
+            <button class="wide-button">
+                <a href="noticeboard.html" style="text-decoration: none;">Notice board &emsp; &emsp; </a>
+                <a href="committee.html" style="text-decoration: none;">Committee &emsp; &emsp; </a>
+                <a href="group.html" style="text-decoration: none;">Interest groups &emsp; &emsp;</a>
+                <a href="aboutus.html" style="text-decoration: none;">About us</a>
+            </button>
+        </div> -->
+
+
+
         <br>
-        
         <div class="text">
-            For Enquires: <a href="mailto: epsom1u3a@gmail.com">
-                email: epsom1u3a@gmail.com</a>
-            <br><br>
+            For enquiries: <a href="mailto: epsom1u3a@gmail.com">
+                email: epsom1u3a@gmail.com</a><br>
+            <br>
         </div>
 
         <div class="div-officers">
@@ -89,7 +134,7 @@
                     email: president.u3aepsom@gmail.com</a><br>
                 <br>
                 Secretary<br>
-                Emily Flynn<br>
+                Jenny Whatman<br>
                 <a href="mailto: secretary.u3aepsom@gmail.com">
                     email: secretary.u3aepsom@gmail.com</a><br>
                 <br>
@@ -99,11 +144,11 @@
                     email: treasurer.u3aepsom@gmail.com</a><br>
                 <br>
             </P>
-           
+
             <button>
                 Meeting venue
             </button>
-            
+
             <p class="text2">
                 Royal Oak Bowls, 146 Selwyn Street,<br>
                 Onehunga, Auckland<br>
@@ -112,7 +157,6 @@
                 Click <a href="map.html">here</a> to view map
             </P>
         </div>
-
 
         <div class="div-library">
             <button>
@@ -138,21 +182,140 @@
             <button>
                 Newsletters
             </button>
+            <br><br>
 
-            <a href="U3A Epsom Newsletter Sept 2024.pdf" target="_blank">
-                <h4>September 2024 newsletter</h4>
-            </a>
-            <a href="U3A Epsom Newsletter Oct 2024.pdf" target="_blank">
-                <h4>October 2024 newsletter</h4>
-            </a>
-            <a href="U3A Epsom Newsletter Nov 2024.pdf" target="_blank">
-                <h4>November 2024 newsletter</h4>
-            </a>
+            <!-- An algorithm is used to post recent newsletters for the past three months. Newsletter pdf files must be named "u3aepsomnewsletterX.pdf" where X is the month number from 1 to 12 for Jan to Dec with no preceding zero. The file name is case sensitive and must all be lower case. -->
 
-            <br>
+            <div id="lastlast-pdf-links"></div>
+
+            <div id="last-pdf-links"></div>
+
+            <div id="current-pdf-links"></div>
+
         </div>
     </div>
 
 </body>
+
+<script>
+
+    /*  Get the current month and date. If entered manually for testing, date format is 'yyyy-m-d' with single quotes. */
+
+    const currentDate = new Date();
+    console.log(currentDate);
+    const today = currentDate.getDate();
+    console.log(today);
+
+    /* Three newsletters will be posted. The current one based on the current month plus two preceding ones. Jan is 0, therefore getMonth has to add 1 to correspond with the file name. */
+
+    let currentMonth = currentDate.getMonth() + 1;
+    console.log(currentMonth);
+
+    let lastMonth = currentMonth - 1;
+    console.log(lastMonth);
+
+    let lastlastMonth = currentMonth - 2;
+    console.log(lastlastMonth);
+
+    /* To delay current month newsletter to be posted by three days. This also allows time for the new newsletter to be uploaded. */
+
+    if (today < 4) {
+        currentMonth = currentMonth - 1;
+        console.log(currentMonth);
+        lastMonth = lastMonth - 1;
+        console.log(lastMonth);
+        lastlastMonth = lastlastMonth - 1;
+        console.log(lastlastMonth);
+    }
+
+    /* There is no newsletter for Jan. So the newsletters to be posted have to be adjusted to show only those available. */
+
+    if (currentMonth === 0) {
+        currentMonth = 12; lastMonth = 11; lastlastMonth = 10;
+    } else if (currentMonth === 1) {
+        currentMonth = 12; lastMonth = 11; lastlastMonth = 10;
+    } else if (currentMonth === 2) {
+        currentMonth = 2; lastMonth = 12; lastlastMonth = 11;
+    } else if (currentMonth === 3) {
+        currentMonth = 3; lastMonth = 2; lastlastMonth = 12;
+    }
+
+    /* Construct the newsletter pdf file names */
+
+    let currentMonthFilename = 'u3aepsomnewsletter' + currentMonth + '.pdf'
+    console.log(currentMonthFilename);
+
+    let lastMonthFilename = 'u3aepsomnewsletter' + lastMonth + '.pdf'
+    console.log(lastMonthFilename);
+
+    let lastlastMonthFilename = 'u3aepsomnewsletter' + lastlastMonth + '.pdf'
+    console.log(lastlastMonthFilename);
+
+    /* Initialise variables for newsletter names */
+
+    let currentMonthNslName = 'current';
+    let lastMonthNslName = 'last';
+    let lastlastMonthNslName = 'lastlast';
+
+
+    /* This array is to generate a name for the newsletter of a certain month. The first value is indexed as 0. Therefore the first array value is a dummy 'Null' to correspond to the filename. */
+
+    let nslNameArray =
+        ['Null',
+            'January newsletter',
+            'February newsletter',
+            'March newsletter',
+            'April newsletter',
+            'May newsletter',
+            'June newsletter',
+            'July newsletter',
+            'August newsletter',
+            'September newsletter',
+            'October newsletter',
+            'November newsletter',
+            'December newsletter'
+        ];
+
+    currentMonthNslName = (nslNameArray[currentMonth]);
+    console.log(currentMonthNslName);
+    lastMonthNslName = (nslNameArray[lastMonth]);
+    console.log(lastMonthNslName);
+    lastlastMonthNslName = (nslNameArray[lastlastMonth]);
+    console.log(lastlastMonthNslName);
+
+
+    // These are codes generated from ChatGPT to form the <a href link to the lastest three newsletters to be posted. //
+
+    const lastlastpdfContainer = document.getElementById("lastlast-pdf-links");
+    const lastlastlink = document.createElement("a");
+    lastlastlink.href = lastlastMonthFilename;
+    lastlastlink.textContent = lastlastMonthNslName;
+    lastlastlink.target = "_blank"; // Open in a new tab
+    lastlastpdfContainer.appendChild(lastlastlink);
+    console.log(lastlastlink);
+    lastlastpdfContainer.appendChild(document.createElement("br",));
+    lastlastpdfContainer.appendChild(document.createElement("br",));
+
+    const lastpdfContainer = document.getElementById("last-pdf-links");
+    const lastlink = document.createElement("a");
+    lastlink.href = lastMonthFilename;
+    lastlink.textContent = lastMonthNslName;
+    lastlink.target = "_blank"; // Open in a new tab
+    lastpdfContainer.appendChild(lastlink);
+    console.log(lastlink);
+    lastpdfContainer.appendChild(document.createElement("br",));
+    lastpdfContainer.appendChild(document.createElement("br",));
+
+    const currentpdfContainer = document.getElementById("current-pdf-links");
+    const currentlink = document.createElement("a");
+    currentlink.href = currentMonthFilename;
+    currentlink.textContent = currentMonthNslName;
+    currentlink.target = "_blank"; // Open in a new tab
+    currentpdfContainer.appendChild(currentlink);
+    console.log(currentlink);
+    currentpdfContainer.appendChild(document.createElement("br",));
+    currentpdfContainer.appendChild(document.createElement("br",));
+
+</script>
 
 </html>
