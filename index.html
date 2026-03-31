@@ -12,7 +12,7 @@
             width: 1000px;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 248px;
+            padding-left: 262px;
             /* background-color: aliceblue; */
         }
 
@@ -21,7 +21,6 @@
             color: aliceblue;
             font-family: Arial;
             font-size: large;
-            font-weight: bold;
             width: 753px;
             height: 40px;
             margin-bottom: 20px;
@@ -54,38 +53,32 @@
             align: center;
         }
 
-        .div-officers {
+        .div-panel {
             display: inline-block;
             width: 400px;
             vertical-align: top;
             font-family: Arial;
         }
 
-        .div-library {
-            display: inline-block;
-            width: 400px;
-            vertical-align: top;
-            font-family: Arial;
-        }
 
         #lastlast-pdf-links {
             font-family: Arial;
-            font-weight: bold;
             font-size: large;
+            font-weight: bold;
             color: rgb(14, 4, 43);
         }
 
         #last-pdf-links {
             font-family: Arial;
-            font-weight: bold;
             font-size: large;
+            font-weight: bold;
             color: rgb(14, 4, 43);
         }
 
         #current-pdf-links {
             font-family: Arial;
-            font-weight: bold;
             font-size: large;
+            font-weight: bold;
             color: rgb(14, 4, 43);
         }
     </style>
@@ -102,23 +95,25 @@
         </div>
 
 
-
         <div class="wide-button">
             <button class="wide-button">
-               <a href="aboutu3a.html" style="text-decoration: none;">About U3A</a>
+                <a href="index.html" style="text-decoration: none;">Home
+                    &emsp; &emsp; &emsp; &emsp; &emsp;</a>
+                <a href="aboutu3a.html" style="text-decoration: none;">About U3A
+                    &emsp; &emsp; &emsp; &emsp; &emsp;</a>
+                <a href="aboutus.html" style="text-decoration: none;">About us
+                    &emsp; &emsp; &emsp; &emsp; &emsp;</a>
+                <a href="joinus.html" style="text-decoration: none;">Join us</a>
             </button>
         </div>
 
-
-
-        <br>
         <div class="text">
             For enquiries: <a href="mailto: epsom1u3a@gmail.com">
                 email: epsom1u3a@gmail.com</a><br>
             <br>
         </div>
 
-        <div class="div-officers">
+        <div class="div-panel">
             <button>
                 Officers
             </button>
@@ -154,7 +149,7 @@
             </P>
         </div>
 
-        <div class="div-library">
+        <div class="div-panel">
             <button>
                 Library
             </button>
@@ -195,14 +190,15 @@
 
 <script>
 
-    /*  Get the current month and date. If entered manually for testing, date format is 'yyyy-m-d' with single quotes. */
+    /*  Get the current month and date. If entered manually for testing, date format is 'yyyy-m-d' with single quotes. Enter the date for testing inside the new Date brackets.
+    Jan is 0, therefore getMonth has to add 1 to correspond with the file name. */
 
     const currentDate = new Date();
     console.log(currentDate);
     const today = currentDate.getDate();
     console.log(today);
 
-    /* Three newsletters will be posted. The current one based on the current month plus two preceding ones. Jan is 0, therefore getMonth has to add 1 to correspond with the file name. */
+    /* Three newsletters will be posted. The current one based on the current month plus two preceding ones. */
 
     let currentMonth = currentDate.getMonth() + 1;
     console.log(currentMonth);
@@ -212,6 +208,7 @@
 
     let lastlastMonth = currentMonth - 2;
     console.log(lastlastMonth);
+
 
     /* To delay current month newsletter to be posted by three days. This also allows time for the new newsletter to be uploaded. */
 
@@ -280,7 +277,9 @@
     console.log(lastlastMonthNslName);
 
 
-    // These are codes generated from ChatGPT to form the <a href link to the lastest three newsletters to be posted. //
+
+    // These are codes generated from GPTChat to form the href link to the lastest five newsletters to be posted. This solves the problem of not opening the pdfs in a new tab despite having the target = "_blank"; in the href. //
+
 
     const lastlastpdfContainer = document.getElementById("lastlast-pdf-links");
     const lastlastlink = document.createElement("a");
